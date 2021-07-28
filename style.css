@@ -2,7 +2,7 @@
     box-sizing: border-box;
 }
 
-.topo{
+.topo {
     background-color: rgb(187, 224, 131);
     display: flex;
     justify-content: center;
@@ -42,7 +42,7 @@ h1 {
     background-color: indigo;
 }
 
-.card{
+.card {
     width: 117px;
     height: 146px;
     margin-right: 25px;
@@ -53,7 +53,7 @@ h1 {
     align-items: center;
 }
 
-.card img{
+.card img {
     width: 90px;
     height: 100px;
 }
@@ -74,7 +74,6 @@ h1 {
     .row-cards-2 {
         flex-direction: column;
         align-items: center;
-        margin-top: 0;
     }
 
     .card {
