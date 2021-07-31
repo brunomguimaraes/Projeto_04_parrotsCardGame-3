@@ -16,3 +16,17 @@ function carregarjogo () {
 }
 
 carregarjogo ();
+
+function distribuirCartas() {
+    const chamarCarta = document.querySelector(".container-cards");
+    chamarCarta.innerHTML = "";
+
+    for (quantidadecartas; quantidadecartas > 0; quantidadecartas--){
+        chamarCarta.innerHTML += `<div class="card">
+        <img src="img/front.png">
+        </div>`;
+    }
+
+}
+
+distribuirCartas();
