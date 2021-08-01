@@ -17,7 +17,7 @@ function carregarjogo () {
 
 carregarjogo ();
 
-function distribuirCartas() {
+/*function distribuirCartas() {
     const chamarCarta = document.querySelector(".container-cards");
     chamarCarta.innerHTML = "";
 
@@ -29,4 +29,12 @@ function distribuirCartas() {
 
 }
 
-distribuirCartas();
+distribuirCartas();*/
+
+const cards = document.querySelectorAll(".card");
+
+function flipCard() {
+  this.classList.toggle("flip");
+}
+
+cards.forEach(card => card.addEventListener('click', flipCard));
