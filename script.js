@@ -7,7 +7,6 @@ function carregarjogo () {
     const max = quantidadecartas <= 14;
 
     if (par && min && max){
-        alert ('lets bora'); //p testar 
     }
     else{ 
         quantidadecartas = Number (prompt ("digite o numero de cartas que deseja jogar")); 
@@ -73,6 +72,7 @@ function flipCard() {
   if (contadorCartasAbertas % 2 === 0){
       primeiraCarta = this; 
       primeiraCarta.removeEventListener('click', flipCard);
+      contadorJogadas += 1 
   }
   else{
       segundaCarta = this;
@@ -80,8 +80,7 @@ function flipCard() {
   }
 
   contadorCartasAbertas += 1
-  console.log(primeiraCarta)
-  console.log(segundaCarta)
+
   let primeiraimg = primeiraCarta.querySelector(".back-face img");
   
   if (primeiraimg.src === segundaimg.src){
@@ -91,13 +90,16 @@ function flipCard() {
   else if (segundaCarta !== "") {
       primeiraCarta.addEventListener('click', flipCard);
       
-      setTimeout(function (){
+      setTimeout(function() {
         primeiraCarta.classList.remove("flip");
         segundaCarta.classList.remove("flip");
       },1000);
 
       contadorCartasAbertas -= 2; 
   } 
+  if (quantidadecartas === contadorCartasAbertas) {
+      setTimeout (alert, 1000 , "Você ganhou com " + contadorJogadas + " jogadas");
+  }
 
 }
 
@@ -105,6 +107,9 @@ cards.forEach(card => card.addEventListener('click', flipCard));
 
 let contadorCartasAbertas = 0; 
 let primeiraCarta;
+let contadorJogadas = 0; 
+
+
 
 
 
