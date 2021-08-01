@@ -72,6 +72,7 @@ function flipCard() {
 
   if (contadorCartasAbertas % 2 === 0){
       primeiraCarta = this; 
+      primeiraCarta.removeEventListener('click', flipCard);
   }
   else{
       segundaCarta = this;
@@ -79,7 +80,8 @@ function flipCard() {
   }
 
   contadorCartasAbertas += 1
-  
+  console.log(primeiraCarta)
+  console.log(segundaCarta)
   let primeiraimg = primeiraCarta.querySelector(".back-face img");
   
   if (primeiraimg.src === segundaimg.src){
@@ -87,6 +89,7 @@ function flipCard() {
       segundaCarta.removeEventListener('click', flipCard);
   } 
   else if (segundaCarta !== "") {
+      primeiraCarta.addEventListener('click', flipCard);
       
       setTimeout(function (){
         primeiraCarta.classList.remove("flip");
