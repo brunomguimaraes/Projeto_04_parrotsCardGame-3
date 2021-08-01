@@ -17,19 +17,51 @@ function carregarjogo () {
 
 carregarjogo ();
 
-/*function distribuirCartas() {
+let listaimg = [`"img/metalparrot.gif"`,
+ `"img/fiestaparrot.gif"`,
+`"img/explodyparrot.gif"`,
+`"img/bobrossparrot.gif"`,
+`"img/revertitparrot.gif"`,
+`"img/tripletsparrot.gif"`,
+`"img/unicornparrot.gif"`];
+
+function embaralharcartas() {
+    listaimg.sort(comparador);
+
+    listaimgs =[];
+    for (i=0 ; i < quantidadecartas/2 ; i++){
+        listaimgs.push (listaimg [i]);
+        listaimgs.push (listaimg [i]);
+    }
+
+    listaimgs.sort(comparador);
+}
+
+let listaimgs =[];
+embaralharcartas();
+
+function comparador() { 
+	return Math.random() - 0.5; 
+}
+
+function distribuirCartas() {
     const chamarCarta = document.querySelector(".container-cards");
     chamarCarta.innerHTML = "";
 
-    for (quantidadecartas; quantidadecartas > 0; quantidadecartas--){
+    for (i=0 ; i < quantidadecartas ; i ++){
         chamarCarta.innerHTML += `<div class="card">
-        <img src="img/front.png">
-        </div>`;
+        <div class="front-face face">
+            <img src="img/front.png" alt="parrot">
+        </div>
+        <div class="back-face face">
+            <img src=${listaimgs [i]} alt="metalparrot">
+        </div>
+    </div>`;
     }
 
 }
 
-distribuirCartas();*/
+distribuirCartas();
 
 const cards = document.querySelectorAll(".card");
 
@@ -38,3 +70,7 @@ function flipCard() {
 }
 
 cards.forEach(card => card.addEventListener('click', flipCard));
+
+`<div class="card">
+        <img src="img/front.png">
+        </div>`;
