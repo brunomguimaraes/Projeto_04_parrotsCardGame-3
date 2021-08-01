@@ -2,7 +2,7 @@ let quantidadecartas = Number (prompt ("digite o numero de cartas que deseja jog
 
 function carregarjogo () {
     
-    const par = quantidadecartas % 2 == 0;
+    const par = quantidadecartas % 2 === 0;
     const min = quantidadecartas >= 4;
     const max = quantidadecartas <= 14;
 
@@ -54,7 +54,7 @@ function distribuirCartas() {
             <img src="img/front.png" alt="parrot">
         </div>
         <div class="back-face face">
-            <img src=${listaimgs [i]} alt="metalparrot">
+            <img src=${listaimgs [i]} >
         </div>
     </div>`;
     }
@@ -66,11 +66,47 @@ distribuirCartas();
 const cards = document.querySelectorAll(".card");
 
 function flipCard() {
-  this.classList.toggle("flip");
+  this.classList.add("flip");
+  let segundaCarta = "";
+  let segundaimg = "";
+
+  if (contadorCartasAbertas % 2 === 0){
+      primeiraCarta = this; 
+  }
+  else{
+      segundaCarta = this;
+      segundaimg = segundaCarta.querySelector(".back-face img");
+  }
+
+  contadorCartasAbertas += 1
+  
+  let primeiraimg = primeiraCarta.querySelector(".back-face img");
+  
+  if (primeiraimg.src === segundaimg.src){
+      primeiraCarta.removeEventListener('click', flipCard);
+      segundaCarta.removeEventListener('click', flipCard);
+  } 
+  else if (segundaCarta !== "") {
+      
+      setTimeout(function (){
+        primeiraCarta.classList.remove("flip");
+        segundaCarta.classList.remove("flip");
+      },1000);
+
+      contadorCartasAbertas -= 2; 
+  } 
+
 }
 
 cards.forEach(card => card.addEventListener('click', flipCard));
 
-`<div class="card">
-        <img src="img/front.png">
-        </div>`;
+let contadorCartasAbertas = 0; 
+let primeiraCarta;
+
+
+
+
+
+
+
+
