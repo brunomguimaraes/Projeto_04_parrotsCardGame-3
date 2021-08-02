@@ -1,3 +1,17 @@
+let flippedCardsCounter = 0; 
+let firstCard;
+let roundCounter = 0;
+let timeId; 
+let secondsCouter = 0;
+let imgsList =[];
+let imgScrs = [`"img/metalparrot.gif"`,
+ `"img/fiestaparrot.gif"`,
+`"img/explodyparrot.gif"`,
+`"img/bobrossparrot.gif"`,
+`"img/revertitparrot.gif"`,
+`"img/tripletsparrot.gif"`,
+`"img/unicornparrot.gif"`];
+const time = document.querySelector(".time")
 let numberCards = Number (prompt ("digite o numero de cartas que deseja jogar")); 
 
 function playGame() {
@@ -12,17 +26,16 @@ function playGame() {
         numberCards = Number (prompt ("digite o numero de cartas que deseja jogar")); 
         playGame();
     }
+
+    timeId = setInterval(counterTime, 1000);
 }
 
 playGame();
 
-let imgScrs = [`"img/metalparrot.gif"`,
- `"img/fiestaparrot.gif"`,
-`"img/explodyparrot.gif"`,
-`"img/bobrossparrot.gif"`,
-`"img/revertitparrot.gif"`,
-`"img/tripletsparrot.gif"`,
-`"img/unicornparrot.gif"`];
+function counterTime() {
+    secondsCouter += 1;
+    time.innerHTML = secondsCouter + " s";
+}
 
 function shuffleCards() {
     imgScrs.sort(comparator);
@@ -36,7 +49,6 @@ function shuffleCards() {
     imgsList.sort(comparator);
 }
 
-let imgsList =[];
 shuffleCards();
 
 function comparator() { 
@@ -98,16 +110,16 @@ function flipCard() {
       flippedCardsCounter -= 2; 
   } 
   if (numberCards === flippedCardsCounter) {
-      setTimeout (alert, 1000 , "Você ganhou com " + roundCounter + " jogadas");
+      clearInterval(timeId);
+      setTimeout (alert, 1000 , `Você ganhou com ${roundCounter} jogadas e em ${secondsCouter} segundos`);
   }
 
 }
 
 cards.forEach(card => card.addEventListener('click', flipCard));
 
-let flippedCardsCounter = 0; 
-let firstCard;
-let roundCounter = 0; 
+ 
+
 
 
 
