@@ -10,13 +10,13 @@ body {
     flex-direction: column;
 }
 
-.topo {
+.top {
     display: flex;
     justify-content: center;
     margin-top: 50px;
 }
 
-.titulo {
+.title {
     width: 550px;
     height: 63px;
     margin-top: 20px;

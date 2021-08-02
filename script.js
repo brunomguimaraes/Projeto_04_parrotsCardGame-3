@@ -1,22 +1,22 @@
-let quantidadecartas = Number (prompt ("digite o numero de cartas que deseja jogar")); 
+let numberCards = Number (prompt ("digite o numero de cartas que deseja jogar")); 
 
-function carregarjogo () {
+function playGame() {
     
-    const par = quantidadecartas % 2 === 0;
-    const min = quantidadecartas >= 4;
-    const max = quantidadecartas <= 14;
+    const even = numberCards % 2 === 0;
+    const min = numberCards >= 4;
+    const max = numberCards <= 14;
 
-    if (par && min && max){
+    if (even && min && max){
     }
     else{ 
-        quantidadecartas = Number (prompt ("digite o numero de cartas que deseja jogar")); 
-        carregarjogo();
+        numberCards = Number (prompt ("digite o numero de cartas que deseja jogar")); 
+        playGame();
     }
 }
 
-carregarjogo ();
+playGame();
 
-let listaimg = [`"img/metalparrot.gif"`,
+let imgScrs = [`"img/metalparrot.gif"`,
  `"img/fiestaparrot.gif"`,
 `"img/explodyparrot.gif"`,
 `"img/bobrossparrot.gif"`,
@@ -24,90 +24,90 @@ let listaimg = [`"img/metalparrot.gif"`,
 `"img/tripletsparrot.gif"`,
 `"img/unicornparrot.gif"`];
 
-function embaralharcartas() {
-    listaimg.sort(comparador);
+function shuffleCards() {
+    imgScrs.sort(comparator);
 
-    listaimgs =[];
-    for (i=0 ; i < quantidadecartas/2 ; i++){
-        listaimgs.push (listaimg [i]);
-        listaimgs.push (listaimg [i]);
+    imgsList =[];
+    for (i=0 ; i < numberCards/2 ; i++){
+        imgsList.push (imgScrs [i]);
+        imgsList.push (imgScrs [i]);
     }
 
-    listaimgs.sort(comparador);
+    imgsList.sort(comparator);
 }
 
-let listaimgs =[];
-embaralharcartas();
+let imgsList =[];
+shuffleCards();
 
-function comparador() { 
+function comparator() { 
 	return Math.random() - 0.5; 
 }
 
-function distribuirCartas() {
-    const chamarCarta = document.querySelector(".container-cards");
-    chamarCarta.innerHTML = "";
+function handOutCards() {
+    const cardsBoard = document.querySelector(".container-cards");
+    cardsBoard.innerHTML = "";
 
-    for (i=0 ; i < quantidadecartas ; i ++){
-        chamarCarta.innerHTML += `<div class="card">
+    for (i=0 ; i < numberCards ; i ++){
+        cardsBoard.innerHTML += `<div class="card">
         <div class="front-face face">
             <img src="img/front.png" alt="parrot">
         </div>
         <div class="back-face face">
-            <img src=${listaimgs [i]} >
+            <img src=${imgsList [i]} >
         </div>
     </div>`;
     }
 
 }
 
-distribuirCartas();
+handOutCards();
 
 const cards = document.querySelectorAll(".card");
 
 function flipCard() {
   this.classList.add("flip");
-  let segundaCarta = "";
-  let segundaimg = "";
+  let secondCard = "";
+  let secondImg = "";
 
-  if (contadorCartasAbertas % 2 === 0){
-      primeiraCarta = this; 
-      primeiraCarta.removeEventListener('click', flipCard);
-      contadorJogadas += 1 
+  if (flippedCardsCounter % 2 === 0){
+      firstCard = this; 
+      firstCard.removeEventListener('click', flipCard);
+      roundCounter += 1 
   }
   else{
-      segundaCarta = this;
-      segundaimg = segundaCarta.querySelector(".back-face img");
+      secondCard = this;
+      secondImg = secondCard.querySelector(".back-face img");
   }
 
-  contadorCartasAbertas += 1
+  flippedCardsCounter += 1
 
-  let primeiraimg = primeiraCarta.querySelector(".back-face img");
+  let firstImg = firstCard.querySelector(".back-face img");
   
-  if (primeiraimg.src === segundaimg.src){
-      primeiraCarta.removeEventListener('click', flipCard);
-      segundaCarta.removeEventListener('click', flipCard);
+  if (firstImg.src === secondImg.src){
+      firstCard.removeEventListener('click', flipCard);
+      secondCard.removeEventListener('click', flipCard);
   } 
-  else if (segundaCarta !== "") {
-      primeiraCarta.addEventListener('click', flipCard);
+  else if (secondCard !== "") {
+      firstCard.addEventListener('click', flipCard);
       
       setTimeout(function() {
-        primeiraCarta.classList.remove("flip");
-        segundaCarta.classList.remove("flip");
+        firstCard.classList.remove("flip");
+        secondCard.classList.remove("flip");
       },1000);
 
-      contadorCartasAbertas -= 2; 
+      flippedCardsCounter -= 2; 
   } 
-  if (quantidadecartas === contadorCartasAbertas) {
-      setTimeout (alert, 1000 , "Você ganhou com " + contadorJogadas + " jogadas");
+  if (numberCards === flippedCardsCounter) {
+      setTimeout (alert, 1000 , "Você ganhou com " + roundCounter + " jogadas");
   }
 
 }
 
 cards.forEach(card => card.addEventListener('click', flipCard));
 
-let contadorCartasAbertas = 0; 
-let primeiraCarta;
-let contadorJogadas = 0; 
+let flippedCardsCounter = 0; 
+let firstCard;
+let roundCounter = 0; 
 
 
 
