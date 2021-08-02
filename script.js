@@ -70,11 +70,11 @@ function handOutCards() {
     </div>`;
     }
 
+    const cards = document.querySelectorAll(".card");
+    cards.forEach(card => card.addEventListener('click', flipCard));
 }
 
 handOutCards();
-
-const cards = document.querySelectorAll(".card");
 
 function flipCard() {
   this.classList.add("flip");
@@ -111,12 +111,26 @@ function flipCard() {
   } 
   if (numberCards === flippedCardsCounter) {
       clearInterval(timeId);
-      setTimeout (alert, 1000 , `Você ganhou com ${roundCounter} jogadas e em ${secondsCouter} segundos`);
+      setTimeout (endGame, 1000);
   }
 
 }
 
-cards.forEach(card => card.addEventListener('click', flipCard));
+function endGame() {
+    alert (`Você ganhou com ${roundCounter} jogadas e em ${secondsCouter} segundos`);
+    const restartGame = prompt ("Você quer jogar novamente?");
+    if (restartGame === "sim" || restartGame === "yes" || restartGame === "lets bora") {
+        flippedCardsCounter = 0; 
+        roundCounter = 0;
+        secondsCouter = 0;
+        numberCards = Number (prompt ("digite o numero de cartas que deseja jogar"));
+        playGame();
+        shuffleCards();
+        handOutCards();
+    }
+
+}
+
 
  
 
